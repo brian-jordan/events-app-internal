@@ -18,9 +18,9 @@ app.use(bodyParser.json());
 // from a cloud data store
 const mockEvents = {
     events: [
-        { title: 'an event', id: 1, description: 'something really cool' },
-        { title: 'another event', id: 2, description: 'something even cooler' },
-        { title: 'new event', id: 2, description: 'testing adding an event!' }
+        { title: 'an event', id: 1, description: 'something really cool', likes: 0 },
+        { title: 'another event', id: 2, description: 'something even cooler', likes: 0 },
+        { title: 'new event', id: 3, description: 'testing adding an event!', likes: 0 }
     ]
 };
 
@@ -56,6 +56,25 @@ app.post('/event', (req, res) => {
      }
     // add to the mock array
     mockEvents.events.push(ev);
+    // return the complete array
+    res.json(mockEvents);
+});
+
+app.post('/like', (req, res) => {
+    // // create a new object from the json data and add an id
+    // const ev = { 
+    //     title: req.body.title, 
+    //     description: req.body.description,
+    //     id : mockEvents.events.length + 1
+    //  }
+    // id = req.body.id - 1
+
+    // past_like_val = mockEvents[id].likes
+    let array_index = Number(req.body.id) - 1
+    mockEvents.events[Number(req.body.id) - 1].likes++
+    // console.log(mockEvents[id].likes)
+    // // add to the mock array
+    // mockEvents.events.push(ev);
     // return the complete array
     res.json(mockEvents);
 });
