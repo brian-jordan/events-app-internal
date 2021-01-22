@@ -62,6 +62,25 @@ app.post('/event', (req, res) => {
     res.json(mockEvents);
 });
 
+app.post('/like', (req, res) => {
+    // // create a new object from the json data and add an id
+    // const ev = { 
+    //     title: req.body.title, 
+    //     description: req.body.description,
+    //     id : mockEvents.events.length + 1
+    //  }
+    // id = req.body.id - 1
+
+    // past_like_val = mockEvents[id].likes
+    let array_index = Number(req.body.id) - 1
+    mockEvents.events[Number(req.body.id) - 1].likes++
+    // console.log(mockEvents[id].likes)
+    // // add to the mock array
+    // mockEvents.events.push(ev);
+    // return the complete array
+    res.json(mockEvents);
+});
+
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({ message: err.message });
